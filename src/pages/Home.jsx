@@ -38,7 +38,7 @@ function Home({ language }) {
       description: isTelugu
         ? "మీ ఆరోగ్య సమాచారాన్ని భద్రపరచండి."
         : "Keep your health information organized.",
-      link: "#health",
+      link: "/health-records",
     },
     {
       icon: "📅",
