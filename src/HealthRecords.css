@@ -1,0 +1,166 @@
+
+/* Health Records - GramCare */
+
+.health-records {
+  width: 90%;
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(20, 90, 70, 0.10);
+  box-sizing: border-box;
+  color: #243b35;
+}
+
+.health-records-header {
+  text-align: center;
+  padding: 22px;
+  margin-bottom: 25px;
+  color: white;
+  background: linear-gradient(120deg, #087f6b, #36b7ad);
+  border-radius: 15px;
+}
+
+.health-records-header h2 {
+  margin: 0 0 8px;
+  font-size: 27px;
+}
+
+.health-records-header p {
+  margin: 0;
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+.health-records-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+  padding: 22px;
+  background: #f5faf8;
+  border: 1px solid #e1efea;
+  border-radius: 15px;
+}
+
+.health-records-form label {
+  display: block;
+  grid-column: 1 / -1;
+  margin-bottom: -8px;
+  font-weight: 600;
+  color: #315c50;
+}
+
+.health-records-form input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #cbded6;
+  border-radius: 9px;
+  background: white;
+  font-size: 15px;
+  outline: none;
+}
+
+.health-records-form input:focus {
+  border-color: #159b83;
+  box-shadow: 0 0 0 3px rgba(21, 155, 131, 0.12);
+}
+
+.health-records-form h3 {
+  grid-column: 1 / -1;
+  margin: 15px 0 3px;
+  color: #087f6b;
+  font-size: 19px;
+}
+
+.health-records-form button {
+  grid-column: 1 / -1;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #087f6b, #24a99a);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.health-records-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(8, 127, 107, 0.2);
+}
+
+.health-records-form [role="status"] {
+  grid-column: 1 / -1;
+  margin: 5px 0 0;
+  color: #087f6b;
+  text-align: center;
+  font-weight: 600;
+}
+
+.health-records-history {
+  margin-top: 28px;
+}
+
+.health-records-history h3 {
+  color: #087f6b;
+  font-size: 21px;
+}
+
+.health-records-card,
+.health-record-card {
+  margin: 12px 0;
+  padding: 18px;
+  background: #f4faf7;
+  border: 1px solid #dcece5;
+  border-radius: 12px;
+}
+
+.health-record-card h4 {
+  margin-top: 0;
+  color: #087f6b;
+}
+
+.health-record-card p {
+  margin: 8px 0;
+}
+
+.health-record-card button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 7px;
+  background: #fce9e7;
+  color: #b44237;
+  cursor: pointer;
+}
+
+.health-records-note {
+  margin-top: 25px;
+  padding: 14px;
+  background: #fff8e8;
+  border-left: 4px solid #e5ae42;
+  border-radius: 8px;
+  color: #725b30;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .health-records {
+    width: 94%;
+    padding: 16px;
+  }
+
+  .health-records-form {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .health-records-header h2 {
+    font-size: 22px;
+  }
+}

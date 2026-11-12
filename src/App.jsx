@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import PatientProfile from './PatientProfile';
+import HealthRecords from './HealthRecords';
 
 const reminderTimes = {
   Morning: '08:00',
@@ -397,6 +398,7 @@ function App() {
 
       {/* Patient Profile Module */}
       <PatientProfile />
+      <HealthRecords />
 
       {/* Footer */}
       <footer>
