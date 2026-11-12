@@ -4,14 +4,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Medicine from "./Medicine";
 import Footer from "./components/Footer";
+
 import "./App.css";
 
 function App() {
   const [language, setLanguage] = useState("en");
 
   const toggleLanguage = () => {
-    setLanguage((previous) => previous === "en" ? "te" : "en");
+    setLanguage((previous) =>
+      previous === "en" ? "te" : "en"
+    );
   };
 
   return (
@@ -22,7 +26,15 @@ function App() {
       />
 
       <Routes>
-        <Route path="/" element={<Home language={language} />} />
+        <Route
+          path="/"
+          element={<Home language={language} />}
+        />
+
+        <Route
+          path="/medicines"
+          element={<Medicine />}
+        />
       </Routes>
 
       <Footer />

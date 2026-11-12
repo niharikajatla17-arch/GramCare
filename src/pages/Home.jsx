@@ -30,7 +30,7 @@ function Home({ language }) {
       description: isTelugu
         ? "మీ మందులు మరియు రోజువారీ రిమైండర్లను చూడండి."
         : "View your medicines and daily reminders.",
-      link: "#medicines",
+      link: "/medicines",
     },
     {
       icon: "❤️",
