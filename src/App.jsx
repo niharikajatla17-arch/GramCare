@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import './App.css';
+import PatientProfile from './PatientProfile';
 
 const reminderTimes = {
   Morning: '08:00',
@@ -25,7 +26,7 @@ function App() {
     'Notifications are not enabled yet.'
   );
 
-  // Save medicines after changes
+  // Save medicines
   useEffect(() => {
     localStorage.setItem(
       'gramcare-medicines',
@@ -158,6 +159,7 @@ function App() {
   return (
     <div className="app">
 
+      {/* Header */}
       <header className="header">
         <div className="brand">
           <span className="brand-icon">✚</span>
@@ -172,6 +174,7 @@ function App() {
 
       <main className="container">
 
+        {/* Welcome Section */}
         <section className="welcome">
           <div>
             <p className="eyebrow">YOUR HEALTH COMPANION</p>
@@ -181,6 +184,7 @@ function App() {
           <div className="welcome-icon">💚</div>
         </section>
 
+        {/* Statistics */}
         <section className="stats">
           <div className="stat-card">
             <span>💊</span>
@@ -202,7 +206,6 @@ function App() {
         </section>
 
         {/* Medicine Management */}
-
         <section className="section">
           <div className="section-heading">
             <div>
@@ -247,7 +250,6 @@ function App() {
         </section>
 
         {/* Medicine List */}
-
         <section className="section">
           <h2>📋 My Medicine List</h2>
 
@@ -267,8 +269,7 @@ function App() {
                     <h3>{med.name}</h3>
                     <p>{med.dosage}</p>
                     <span className="time-tag">
-                      🕒 {med.time} (
-                      {reminderTimes[med.time]})
+                      🕒 {med.time} ({reminderTimes[med.time]})
                     </span>
                   </div>
 
@@ -285,8 +286,7 @@ function App() {
           )}
         </section>
 
-        {/* Medicine Reminder Feature */}
-
+        {/* Medicine Reminders */}
         <section className="section">
           <h2>🔔 Medicine Reminders</h2>
 
@@ -334,7 +334,6 @@ function App() {
         </section>
 
         {/* Prescription Upload */}
-
         <section className="section">
           <h2>📸 Prescription Records</h2>
 
@@ -365,7 +364,6 @@ function App() {
         </section>
 
         {/* Voice Assistance */}
-
         <section className="voice-section">
           <div>
             <h2>🔊 Voice Assistance</h2>
@@ -397,6 +395,10 @@ function App() {
 
       </main>
 
+      {/* Patient Profile Module */}
+      <PatientProfile />
+
+      {/* Footer */}
       <footer>
         <h3>💚 GramCare</h3>
         <p>Bringing healthcare closer to every village.</p>
