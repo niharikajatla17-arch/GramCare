@@ -1,115 +1,16 @@
-# 🌿 GramCare – Smart Rural Healthcare Assistance Platform
+# React + Vite
 
-> Making medicine management and regular health follow-ups simple, voice-based and accessible for rural communities.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## 📌 Problem Statement
+Currently, two official plugins are available:
 
-During our village visit, we found that a primary healthcare facility is available within about 2 km, and most villagers did not report major difficulty reaching healthcare. However, we identified a real everyday challenge: **keeping track of prescribed medicines**. Villagers, especially elderly people, struggle to maintain organized written lists of medicines, remember schedules, and understand instructions in a simple format.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-**How can we make medicine management and regular healthcare follow-ups simpler and more accessible through technology, especially for people who need additional assistance?**
+## React Compiler
 
-## 💡 Our Solution
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-GramCare is a simple, Telugu-first platform that helps patients, family members and local health workers manage medicines and follow-ups in one place.
+## Expanding the Oxlint configuration
 
-**Core flow:**
-
-1. 📷 Upload a photo of the prescription
-2. 🤖 AI extracts the medicines, doses and timings
-3. ✅ A person confirms the details are correct
-4. ⏰ A daily medicine schedule is created
-5. 🔊 Voice reminders are played in Telugu (and other local languages)
-6. 🔔 Family members or health workers are alerted if a dose is missed
-
-## ✨ Features
-
-### Available in this prototype
-- [ ] Prescription upload and medicine extraction
-- [ ] Confirmation screen for extracted medicines
-- [ ] Medicine schedule and daily dashboard
-- [ ] Telugu voice-based reminders
-- [ ] Missed-dose alert for family member / health worker
-- [ ] Simple health worker view of patient status
-
-### Planned (future scope)
-- Blood pressure tracking
-- Pregnancy checkup and scan reminders
-- Medicine refill requests through registered pharmacies and delivery tracking
-- Doctor consultations through calls or SMS, and home visit requests
-- Reminders through phone calls and SMS for people without smartphones
-- Support for more local languages
-
-*(Tick the boxes above as you finish each one.)*
-
-## ♿ Designed for Accessibility
-
-- **Telugu-first and voice-first**, with minimal text and large icons
-- **Works as a web app (PWA)**: no Play Store download, works on low-end phones
-- **Photo instead of typing** for entering prescriptions
-- **Operator-friendly:** a family member or local health worker can set up and manage an elderly person's profile
-- **Low-connectivity friendly**, with reminders scheduled ahead
-
-## 🛠️ Tech Stack
-
-*(Edit to match what you use.)*
-
-| Layer | Technology |
-|---|---|
-| Frontend | [React / Next.js / HTML + Tailwind] (PWA) |
-| Backend & Database | [Supabase / Firebase] |
-| Prescription Reading | [Claude API / Gemini / Google Vision OCR] |
-| Voice | [Web Speech API (te-IN) / Google Text-to-Speech] |
-| Reminders | [Twilio / Exotel / browser notifications] |
-| Hosting | [Vercel / Netlify] |
-
-## 🚀 Getting Started
-
-```bash
-# 1. Clone the repository
-git clone [your-repo-url]
-cd [your-repo-name]
-
-# 2. Install dependencies
-npm install
-
-# 3. Add environment variables
-# Create a .env file and add your keys (see .env.example)
-
-# 4. Run the app
-npm run dev
-```
-
-**Live demo:** [add link]
-**Demo video:** [add link]
-
-## 🌱 Sustainability
-
-- **Run by the community:** Local health workers and family members act as operators, so it does not depend on villagers being tech-savvy.
-- **Free for villagers:** Possible support through pharmacy partnerships, NGOs, CSR programs and health initiatives.
-- **Low running cost:** Built on free-tier cloud services, with costs only per reminder sent.
-- **Scalable:** The same approach can support BP, diabetes and pregnancy follow-ups in other villages.
-
-## 🔒 Safety & Privacy
-
-- GramCare **supports** medicine management. It does **not** give medical advice, diagnose conditions or change doses.
-- AI-extracted prescription details are always **confirmed by a person** before use.
-- Health data is sensitive: we use consent-based, secure storage, and no real patient data is included in this repository.
-
-## 🗺️ Roadmap
-
-- [x] Field research and problem identification in the village
-- [ ] Working prototype (prescription → schedule → voice reminder → alert)
-- [ ] Pilot with a village health worker and a few families
-- [ ] Add BP tracking and pregnancy follow-up modules
-- [ ] Pharmacy and doctor integration
-- [ ] Expand to nearby villages
-
-## 👥 Team
-
-**Team [Team Name]**: [Member 1], [Member 2], [Member 3], [Member 4]
-
-Built for **Sociothon Round 2**.
-
-## 📄 License
-
-[MIT License / choose one]# GramCare
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
