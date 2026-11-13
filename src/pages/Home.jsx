@@ -46,15 +46,23 @@ function Home({ language }) {
       description: isTelugu
         ? "డాక్టర్ సందర్శనలు మరియు పరీక్షలను నిర్వహించండి."
         : "Manage doctor visits and checkups.",
-      link: "#appointments",
+      link: "/appointments",
+    },
+    {
+      icon: "🔔",
+      title: isTelugu ? "ఫాలో-అప్స్" : "Follow-Ups",
+      description: isTelugu
+        ? "మీ తదుపరి వైద్య సందర్శనలను గుర్తుంచుకోండి."
+        : "Keep track of your upcoming follow-up visits.",
+      link: "/follow-ups",
     },
     {
       icon: "👩‍⚕️",
       title: isTelugu ? "డాక్టర్ సహాయం" : "Doctor Assistance",
       description: isTelugu
-        ? "వైద్య నిపుణుల సహాయం పొందండి."
-        : "Find help from healthcare professionals.",
-      link: "#assistance",
+        ? "మీ ఇంటి వద్ద వైద్య సందర్శన కోసం అభ్యర్థించండి."
+        : "Request a healthcare professional home visit.",
+      link: "/doctor-assistance",
     },
   ];
 
@@ -101,7 +109,9 @@ function Home({ language }) {
         </h2>
 
         <p className="section-description">
-          {isTelugu ? "ప్రారంభించడానికి ఒక సేవను ఎంచుకోండి." : "Choose a service to get started."}
+          {isTelugu
+            ? "ప్రారంభించడానికి ఒక సేవను ఎంచుకోండి."
+            : "Choose a service to get started."}
         </p>
 
         <div className="service-grid">

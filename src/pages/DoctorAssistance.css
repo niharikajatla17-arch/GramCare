@@ -1,0 +1,267 @@
+
+.doctor-assistance-page {
+  max-width: 1050px;
+  margin: 35px auto;
+  padding: 20px;
+  color: #263b32;
+}
+
+.doctor-assistance-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.doctor-assistance-header h2 {
+  color: #245b43;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.doctor-assistance-header p {
+  color: #66756c;
+  font-size: 16px;
+}
+
+.home-visit-card,
+.home-visit-history {
+  background: #ffffff;
+  padding: 28px;
+  margin-bottom: 25px;
+  border-radius: 14px;
+  border: 1px solid #e1ebe4;
+  box-shadow: 0 4px 15px rgba(30, 70, 45, 0.07);
+}
+
+.home-visit-card h3,
+.home-visit-history h3 {
+  color: #245b43;
+  margin-bottom: 12px;
+}
+
+.doctor-card-description {
+  color: #6b7b70;
+  margin-bottom: 22px;
+}
+
+.saved-patient-details {
+  background: #f2f8f3;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.saved-patient-details h4,
+.home-visit-form h4 {
+  color: #245b43;
+  margin-bottom: 16px;
+}
+
+.patient-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.patient-detail-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.patient-detail-grid span {
+  color: #718076;
+  font-size: 13px;
+}
+
+.patient-detail-grid strong {
+  color: #263b32;
+  overflow-wrap: anywhere;
+}
+
+.edit-profile-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #24764d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.edit-profile-link:hover {
+  text-decoration: underline;
+}
+
+.home-visit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home-visit-form h4 {
+  margin-top: 15px;
+}
+
+.home-visit-form label {
+  font-weight: 600;
+  color: #344d3e;
+  margin-top: 8px;
+}
+
+.home-visit-form input,
+.home-visit-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd9ce;
+  border-radius: 8px;
+  font: inherit;
+  color: #263b32;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.home-visit-form input:focus,
+.home-visit-form textarea:focus {
+  outline: none;
+  border-color: #36845a;
+  box-shadow: 0 0 0 2px rgba(54, 132, 90, 0.12);
+}
+
+.home-visit-form textarea {
+  resize: vertical;
+}
+
+.home-visit-submit {
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #28764c;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.home-visit-submit:hover {
+  background: #1e5c3a;
+}
+
+.profile-warning {
+  padding: 18px;
+  background: #fff8e8;
+  border: 1px solid #f0dcae;
+  border-radius: 9px;
+  color: #725b26;
+}
+
+.profile-warning a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #24764d;
+  font-weight: 600;
+}
+
+.home-visit-message {
+  padding: 13px;
+  margin-top: 18px;
+  background: #e9f7ed;
+  color: #24643b;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.home-visit-history {
+  margin-top: 25px;
+}
+
+.no-home-requests {
+  color: #77847b;
+  padding: 15px 0;
+}
+
+.home-request-list {
+  display: grid;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.home-request-item {
+  padding: 18px;
+  border: 1px solid #e0e9e2;
+  border-radius: 10px;
+  background: #fbfdfb;
+  overflow-wrap: anywhere;
+}
+
+.home-request-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.home-request-top h4 {
+  color: #245b43;
+  margin: 0;
+}
+
+.home-request-item p {
+  margin: 8px 0;
+  color: #53645a;
+  line-height: 1.5;
+}
+
+.home-request-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.home-request-status.pending {
+  background: #fff1d5;
+  color: #946000;
+}
+
+.home-request-status.approved {
+  background: #e0f3e6;
+  color: #23643b;
+}
+
+.home-request-status.completed {
+  background: #e5edfa;
+  color: #315a91;
+}
+
+.doctor-assistance-note {
+  text-align: center;
+  color: #77847b;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 10px 15px;
+}
+
+@media (max-width: 600px) {
+  .doctor-assistance-page {
+    padding: 12px;
+  }
+
+  .home-visit-card,
+  .home-visit-history {
+    padding: 18px;
+  }
+
+  .patient-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-request-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .doctor-assistance-header h2 {
+    font-size: 25px;
+  }
+}

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import "./Medicine.css";
 
@@ -7,7 +8,9 @@ const reminderTimes = {
   Night: "20:00",
 };
 
-function Medicine() {
+function Medicine({ language }) {
+  const isTelugu = language === "te";
+
   const [medicines, setMedicines] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("gramcare-medicines")) || [];
@@ -24,6 +27,8 @@ function Medicine() {
     "Notifications are not enabled yet."
   );
 
+  const t = (english, telugu) => (isTelugu ? telugu : english);
+
   useEffect(() => {
     localStorage.setItem(
       "gramcare-medicines",
@@ -35,7 +40,10 @@ function Medicine() {
     e.preventDefault();
 
     if (!name.trim() || !dosage.trim()) {
-      alert("Please enter medicine name and dosage.");
+      alert(t(
+        "Please enter medicine name and dosage.",
+        "దయచేసి మందు పేరు మరియు మోతాదును నమోదు చేయండి."
+      ));
       return;
     }
 
@@ -61,7 +69,10 @@ function Medicine() {
   const enableReminders = async () => {
     if (!("Notification" in window)) {
       setReminderStatus(
-        "Your browser does not support notifications."
+        t(
+          "Your browser does not support notifications.",
+          "మీ బ్రౌజర్ నోటిఫికేషన్‌లకు మద్దతు ఇవ్వదు."
+        )
       );
       return;
     }
@@ -71,19 +82,33 @@ function Medicine() {
 
       if (permission === "granted") {
         setReminderStatus(
-          "Reminders enabled! Keep GramCare open for reminders."
+          t(
+            "Reminders enabled! Keep GramCare open for reminders.",
+            "రిమైండర్‌లు ప్రారంభించబడ్డాయి! రిమైండర్‌ల కోసం GramCare తెరిచి ఉంచండి."
+          )
         );
 
         new Notification("GramCare", {
-          body: "Medicine reminders are now enabled!",
+          body: t(
+            "Medicine reminders are now enabled!",
+            "మందుల రిమైండర్‌లు ఇప్పుడు ప్రారంభించబడ్డాయి!"
+          ),
         });
       } else {
         setReminderStatus(
-          "Notifications were not allowed. Please enable them in browser settings."
+          t(
+            "Notifications were not allowed. Please enable them in browser settings.",
+            "నోటిఫికేషన్‌లకు అనుమతి లభించలేదు. దయచేసి బ్రౌజర్ సెట్టింగ్‌లలో ప్రారంభించండి."
+          )
         );
       }
     } catch {
-      setReminderStatus("Unable to enable notifications.");
+      setReminderStatus(
+        t(
+          "Unable to enable notifications.",
+          "నోటిఫికేషన్‌లను ప్రారంభించడం సాధ్యం కాలేదు."
+        )
+      );
     }
   };
 
@@ -115,9 +140,15 @@ function Medicine() {
           const reminderKey = `gramcare-reminder-${today}-${med.id}`;
 
           if (!localStorage.getItem(reminderKey)) {
-            new Notification("GramCare Medicine Reminder 💊", {
-              body: `Time for ${med.name} - ${med.dosage}. Please follow your prescription.`,
-            });
+            new Notification(
+              t(
+                "GramCare Medicine Reminder 💊",
+                "GramCare మందుల రిమైండర్ 💊"
+              ),
+              {
+                body: `${t("Time for", "మందు తీసుకునే సమయం")}: ${med.name} - ${med.dosage}.`,
+              }
+            );
 
             localStorage.setItem(reminderKey, "sent");
           }
@@ -129,120 +160,160 @@ function Medicine() {
     const interval = setInterval(checkReminders, 15000);
 
     return () => clearInterval(interval);
-  }, [medicines]);
+  }, [medicines, isTelugu]);
 
   const speak = (message) => {
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
 
       const speech = new SpeechSynthesisUtterance(message);
-      speech.lang = "en-IN";
+      speech.lang = isTelugu ? "te-IN" : "en-IN";
       speech.rate = 0.85;
 
       window.speechSynthesis.speak(speech);
     } else {
-      alert("Voice assistance is not supported in this browser.");
+      alert(
+        t(
+          "Voice assistance is not supported in this browser.",
+          "ఈ బ్రౌజర్‌లో వాయిస్ సహాయం అందుబాటులో లేదు."
+        )
+      );
     }
+  };
+
+  const timeLabels = {
+    Morning: t("Morning", "ఉదయం"),
+    Afternoon: t("Afternoon", "మధ్యాహ్నం"),
+    Night: t("Night", "రాత్రి"),
   };
 
   return (
     <div className="medicine-page">
       <main className="container">
+
+        {/* Welcome */}
         <section className="medicine-welcome">
           <div>
-            <p className="eyebrow">YOUR HEALTH COMPANION</p>
-            <h2>Good day! 👋</h2>
-            <p>Manage your medicines and stay on track with your health.</p>
+            <p className="eyebrow">
+              {t("YOUR HEALTH COMPANION", "మీ ఆరోగ్య సహచరుడు")}
+            </p>
+
+            <h2>{t("Good day! 👋", "శుభోదయం! 👋")}</h2>
+
+            <p>
+              {t(
+                "Manage your medicines and stay on track with your health.",
+                "మీ మందులను నిర్వహించండి మరియు మీ ఆరోగ్యాన్ని క్రమంగా పర్యవేక్షించండి."
+              )}
+            </p>
           </div>
           <div className="welcome-icon">💚</div>
         </section>
 
+        {/* Statistics */}
         <section className="stats">
           <div className="stat-card">
             <span>💊</span>
             <h3>{medicines.length}</h3>
-            <p>Saved Medicines</p>
+            <p>{t("Saved Medicines", "సేవ్ చేసిన మందులు")}</p>
           </div>
+
           <div className="stat-card">
             <span>🔔</span>
             <h3>3</h3>
-            <p>Reminder Slots</p>
+            <p>{t("Reminder Slots", "రిమైండర్ సమయాలు")}</p>
           </div>
+
           <div className="stat-card">
             <span>📋</span>
             <h3>{file ? "1" : "0"}</h3>
-            <p>Uploaded Records</p>
+            <p>{t("Uploaded Records", "అప్‌లోడ్ చేసిన రికార్డులు")}</p>
           </div>
         </section>
 
+        {/* Add Medicine */}
         <section className="section">
           <div className="section-heading">
             <div>
-              <h2>💊 Medicine Management</h2>
-              <p>Add and manage your prescribed medicines.</p>
+              <h2>💊 {t("Medicine Management", "మందుల నిర్వహణ")}</h2>
+              <p>
+                {t(
+                  "Add and manage your prescribed medicines.",
+                  "మీకు సూచించిన మందులను జోడించండి మరియు నిర్వహించండి."
+                )}
+              </p>
             </div>
           </div>
 
           <form className="medicine-form" onSubmit={addMedicine}>
-            <h3>➕ Add New Medicine</h3>
+            <h3>➕ {t("Add New Medicine", "కొత్త మందును జోడించండి")}</h3>
 
-            <label>Medicine Name</label>
+            <label>{t("Medicine Name", "మందు పేరు")}</label>
             <input
               type="text"
-              placeholder="Enter medicine name"
+              placeholder={t("Enter medicine name", "మందు పేరు నమోదు చేయండి")}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
 
-            <label>Dosage (as prescribed)</label>
+            <label>{t("Dosage (as prescribed)", "మోతాదు (వైద్యుడు సూచించినట్లు)")}</label>
             <input
               type="text"
-              placeholder="Example: 1 tablet"
+              placeholder={t("Example: 1 tablet", "ఉదాహరణ: 1 టాబ్లెట్")}
               value={dosage}
               onChange={(e) => setDosage(e.target.value)}
             />
 
-            <label>Reminder Time</label>
+            <label>{t("Reminder Time", "రిమైండర్ సమయం")}</label>
             <select
               value={time}
               onChange={(e) => setTime(e.target.value)}
             >
-              <option>Morning</option>
-              <option>Afternoon</option>
-              <option>Night</option>
+              <option value="Morning">{timeLabels.Morning}</option>
+              <option value="Afternoon">{timeLabels.Afternoon}</option>
+              <option value="Night">{timeLabels.Night}</option>
             </select>
 
             <button type="submit" className="primary-btn">
-              + Add Medicine
+              + {t("Add Medicine", "మందును జోడించండి")}
             </button>
           </form>
         </section>
 
+        {/* Medicine List */}
         <section className="section">
-          <h2>📋 My Medicine List</h2>
+          <h2>📋 {t("My Medicine List", "నా మందుల జాబితా")}</h2>
 
           {medicines.length === 0 ? (
             <div className="empty-state">
               <span>💊</span>
-              <h3>No medicines added yet</h3>
-              <p>Add medicines according to your doctor's prescription.</p>
+              <h3>{t("No medicines added yet", "ఇంకా మందులు జోడించలేదు")}</h3>
+              <p>
+                {t(
+                  "Add medicines according to your doctor's prescription.",
+                  "మీ వైద్యుడు సూచించిన మందులను జోడించండి."
+                )}
+              </p>
             </div>
           ) : (
             <div className="medicine-list">
               {medicines.map((med) => (
                 <div className="medicine-card" key={med.id}>
                   <div className="medicine-icon">💊</div>
+
                   <div className="medicine-info">
                     <h3>{med.name}</h3>
                     <p>{med.dosage}</p>
                     <span className="time-tag">
-                      🕒 {med.time} ({reminderTimes[med.time]})
+                      🕒 {timeLabels[med.time]} ({reminderTimes[med.time]})
                     </span>
                   </div>
+
                   <button
                     type="button"
                     className="delete-btn"
                     onClick={() => deleteMedicine(med.id)}
+                    aria-label={t("Delete medicine", "మందును తొలగించండి")}
                   >
                     ✕
                   </button>
@@ -252,10 +323,15 @@ function Medicine() {
           )}
         </section>
 
+        {/* Reminders */}
         <section className="section">
-          <h2>🔔 Medicine Reminders</h2>
+          <h2>🔔 {t("Medicine Reminders", "మందుల రిమైండర్‌లు")}</h2>
+
           <p className="section-description">
-            Receive browser notifications at your selected medicine times.
+            {t(
+              "Receive browser notifications at your selected medicine times.",
+              "మీరు ఎంచుకున్న మందుల సమయాల్లో బ్రౌజర్ నోటిఫికేషన్‌లను పొందండి."
+            )}
           </p>
 
           <div className="medicine-form">
@@ -267,7 +343,7 @@ function Medicine() {
               <div className="medicine-card" key={title}>
                 <span>{icon}</span>
                 <div className="medicine-info">
-                  <h3>{title}</h3>
+                  <h3>{timeLabels[title]}</h3>
                   <p>{clock}</p>
                 </div>
               </div>
@@ -278,7 +354,10 @@ function Medicine() {
               className="primary-btn"
               onClick={enableReminders}
             >
-              🔔 Enable Medicine Notifications
+              🔔 {t(
+                "Enable Medicine Notifications",
+                "మందుల నోటిఫికేషన్‌లను ప్రారంభించండి"
+              )}
             </button>
 
             <p className="section-description" role="status">
@@ -287,16 +366,22 @@ function Medicine() {
           </div>
         </section>
 
+        {/* Prescription */}
         <section className="section">
-          <h2>📸 Prescription Records</h2>
+          <h2>📸 {t("Prescription Records", "ప్రిస్క్రిప్షన్ రికార్డులు")}</h2>
+
           <p className="section-description">
-            Upload a photo or PDF of your doctor's prescription for easy reference.
+            {t(
+              "Upload a photo or PDF of your doctor's prescription for easy reference.",
+              "సులభంగా చూడటానికి మీ వైద్యుని ప్రిస్క్రిప్షన్ ఫోటో లేదా PDF అప్‌లోడ్ చేయండి."
+            )}
           </p>
 
           <label className="upload-box">
             <span>📁</span>
-            <strong>Upload Prescription</strong>
-            <small>Choose an image or PDF file</small>
+            <strong>{t("Upload Prescription", "ప్రిస్క్రిప్షన్ అప్‌లోడ్ చేయండి")}</strong>
+            <small>{t("Choose an image or PDF file", "చిత్రం లేదా PDF ఫైల్ ఎంచుకోండి")}</small>
+
             <input
               type="file"
               accept="image/*,.pdf"
@@ -304,13 +389,23 @@ function Medicine() {
             />
           </label>
 
-          {file && <p className="file-name">✓ Selected: {file.name}</p>}
+          {file && (
+            <p className="file-name">
+              ✓ {t("Selected:", "ఎంచుకున్నది:")} {file.name}
+            </p>
+          )}
         </section>
 
+        {/* Voice Assistance */}
         <section className="voice-section">
           <div>
-            <h2>🔊 Voice Assistance</h2>
-            <p>Listen to your medicine schedule.</p>
+            <h2>🔊 {t("Voice Assistance", "వాయిస్ సహాయం")}</h2>
+            <p>
+              {t(
+                "Listen to your medicine schedule.",
+                "మీ మందుల షెడ్యూల్‌ను వినండి."
+              )}
+            </p>
           </div>
 
           <button
@@ -319,23 +414,32 @@ function Medicine() {
             onClick={() =>
               speak(
                 medicines.length
-                  ? "Your saved medicines are: " +
+                  ? t(
+                      "Your saved medicines are: ",
+                      "మీరు సేవ్ చేసిన మందులు: "
+                    ) +
                       medicines
-                        .map((m) => `${m.name}, ${m.dosage}, ${m.time}`)
+                        .map((m) => `${m.name}, ${m.dosage}, ${timeLabels[m.time]}`)
                         .join(". ")
-                  : "You have not added any medicines yet."
+                  : t(
+                      "You have not added any medicines yet.",
+                      "మీరు ఇంకా మందులను జోడించలేదు."
+                    )
               )
             }
           >
-            🔊 Read My Medicines
+            🔊 {t("Read My Medicines", "నా మందులను చదవండి")}
           </button>
         </section>
 
+        {/* Disclaimer */}
         <p className="disclaimer">
-          Important: Enter medicines and dosages only as prescribed by a
-          qualified healthcare professional. GramCare does not diagnose
-          illnesses or recommend medicines.
+          {t(
+            "Important: Enter medicines and dosages only as prescribed by a qualified healthcare professional. GramCare does not diagnose illnesses or recommend medicines.",
+            "ముఖ్యమైనది: అర్హత కలిగిన వైద్య నిపుణుడు సూచించిన మందులు మరియు మోతాదులను మాత్రమే నమోదు చేయండి. GramCare వ్యాధులను నిర్ధారించదు లేదా మందులను సిఫార్సు చేయదు."
+          )}
         </p>
+
       </main>
     </div>
   );
